@@ -1,0 +1,22 @@
+diff --git a/node_modules/browserstack-local/lib/LocalBinary.js b/node_modules/browserstack-local/lib/LocalBinary.js
+index 8d694b2..0b9617c 100644
+--- a/node_modules/browserstack-local/lib/LocalBinary.js
++++ b/node_modules/browserstack-local/lib/LocalBinary.js
+@@ -275,7 +275,7 @@ function LocalBinary(){
+     var destParentDir = this.getAvailableDirs();
+     var destBinaryName = (this.windows) ? 'BrowserStackLocal.exe' : 'BrowserStackLocal';
+     var binaryPath = path.join(destParentDir, destBinaryName);
+-    if(this.checkPath(binaryPath, fs.X_OK)){
++    if(this.checkPath(binaryPath, fs.constants.X_OK)){
+       if(!callback) {
+         return binaryPath;
+       }
+@@ -290,7 +290,7 @@ function LocalBinary(){
+   };
+ 
+   this.checkPath = function(path, mode){
+-    mode = mode || (fs.R_OK | fs.W_OK);
++    mode = mode || (fs.constants.R_OK | fs.constants.W_OK);
+     try {
+       fs.accessSync(path, mode);
+       return true;

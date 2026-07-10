@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="nextjs_svg__a" x1="112.847" x2="155.536" y1="121.866" y2="174.775"
+      gradientTransform="scale(.71111)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="nextjs_svg__b" x1="127.277" x2="127.035" y1="46.71" y2="110.292"
+      gradientTransform="scale(.71111)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <path d="M0 0h128v128H0z" />
+  <path fill="url(#nextjs_svg__a)"
+    d="m114.886 121.736-68.722-88.52H33.216v61.542h10.359V46.37L106.753 128a77 77 0 0 0 8.133-6.264" />
+  <path fill="url(#nextjs_svg__b)" d="M85.378 33.216h10.261v61.568H85.378z" />
+</svg>

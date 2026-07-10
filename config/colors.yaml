@@ -1,0 +1,17 @@
+sequence:
+  - blue
+  - green
+  - yellow
+  - red
+
+brand:
+  blue: '#00cae9'
+  green: '#9adfa8'
+  yellow: '#e7e19d'
+  red: '#e4aaa2'
+
+true:
+  blue: '#0000ff'
+  green: '#00ff00'
+  yellow: '#ffff00'
+  red: '#ff0000'

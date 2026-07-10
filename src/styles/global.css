@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue-b75) var(--color-blue-w75);
+}
+
+::-webkit-scrollbar {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-blue-b75);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-blue-w75);
+}
+
+html {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+::selection {
+    background-color: var(--color-blue);
+    color: #fff;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+.mix-blend-saturation {
+    mix-blend-mode: saturation;
+}
+
+:root {
+    --swirl-a: var(--color-blue-b25);
+    --swirl-b: var(--color-yellow-b25);
+    --swirl-c: var(--color-green-b25);
+    --swirl-d: var(--color-red-b25);
+}
+
+@property --swirl-c1 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
+@property --swirl-c2 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
+@property --swirl-c3 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
+@property --swirl-c4 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
+@keyframes swirl-cycle {
+    0%,
+    100% {
+        --swirl-c1: var(--swirl-a);
+        --swirl-c2: var(--swirl-b);
+        --swirl-c3: var(--swirl-c);
+        --swirl-c4: var(--swirl-d);
+    }
+
+    25% {
+        --swirl-c1: var(--swirl-b);
+        --swirl-c2: var(--swirl-c);
+        --swirl-c3: var(--swirl-d);
+        --swirl-c4: var(--swirl-a);
+    }
+
+    50% {
+        --swirl-c1: var(--swirl-c);
+        --swirl-c2: var(--swirl-d);
+        --swirl-c3: var(--swirl-a);
+        --swirl-c4: var(--swirl-b);
+    }
+
+    75% {
+        --swirl-c1: var(--swirl-d);
+        --swirl-c2: var(--swirl-a);
+        --swirl-c3: var(--swirl-b);
+        --swirl-c4: var(--swirl-c);
+    }
+}
+
+.swirl {
+    animation: swirl-cycle 30s linear infinite;
+    background:
+            radial-gradient(circle at 0% 0%, var(--swirl-c1), transparent 65%),
+            radial-gradient(circle at 100% 100%, var(--swirl-c2), transparent 65%),
+            radial-gradient(circle at 100% 0%, var(--swirl-c3), transparent 65%),
+            radial-gradient(circle at 0% 100%, var(--swirl-c4), transparent 65%),
+            #fff;
+}
+

@@ -1,0 +1,276 @@
+title: Tony Bogdanov — Full-Stack Software Engineer
+
+profile:
+  start: 2006
+  name: Tony Bogdanov
+  title: Full-Stack Software Engineer
+  linkedin: https://www.linkedin.com/in/tonybogdanov
+  github: https://github.com/tonybogdanov
+  upwork: https://www.upwork.com/freelancers/~0122fee97e6a5ad6af
+  website: https://tonybogdanov.com
+  location: Vidin, Bulgaria
+  timezone: EET/EEST
+  availability: Remote only
+  availabilityExtended: Remote work only
+  summary: >-
+    Software Engineer with **{yearsOfExperience} years** of experience building and operating full-stack systems
+    end to end, from **React** and **Node.js** to **Kubernetes** operators in **Go** and high-availability
+    distributed systems. Strong fit for senior frontend/backend or platform-heavy engineering roles that need product
+    delivery and production ownership.
+
+hero:
+  focus: [ Tony, Bogdanov ]
+  headline: Full-Stack Software Engineer with <u>{yearsOfExperience} years</u> of experience building systems end-to-end.
+
+about:
+  headline: About me
+  subline: My Story
+  text:
+    - >-
+      My fascination with computers started early—exploring website source code in internet cafés before
+      teaching myself HTML, CSS, JavaScript, PHP, and SQL.
+    - >-
+      By 2006, that curiosity had become commercial: a friend and I launched **flash4e.com**, a Flash game
+      portal that generated advertising revenue. This led to working with the creators of **RumbleRace**,
+      localizing the game for Bulgaria, maintaining its codebase, and operating its SMS payment platform.
+    - >-
+      While completing my Bachelor's degree in Computer Science in 2012, I joined my first in-house software
+      engineering team, building on years of commercial development experience.
+    - >-
+      Since then I've worked across the entire stack—from user interfaces and APIs to cloud infrastructure.
+      Today I primarily build with TypeScript, React, Node.js, and Kubernetes, while adapting to whatever
+      technologies a project requires.
+  stats:
+    primary:
+      label: [ years, of coding, experience ]
+      value: '{yearsOfExperience}'
+    secondary:
+      - color: green
+        value: [ '2006' ]
+        label: [ First revenue, from code ]
+      - color: red
+        value: [ '15' ]
+        label: [ 'Years old,', first line of code ]
+      - color: yellow
+        value: [ '7' ]
+        label: [ Years, freelancing ]
+
+timeline:
+  headline: Where I've been
+  subline: Career & Education
+  jobs:
+    - group: 0
+      label: Work
+      startYear: 2023
+      position: [ Software Engineer, Software Engineer ]
+      company: [ CARAUKTION AG, CARAUKTION AG ]
+      companyUrl: https://carauktion.ch
+      summary: Full-stack work on car auction products, including one acquired by AutoScout24
+      description:
+        - >-
+          Contributed to the creation of **AutoScout24 Direct** (acquired in 2025), enabling private
+          sellers to auction their vehicles to a network of dealers. Contributed across the entire flow, from the
+          backend submission pipeline to the seller-facing listing interface. Today I'm building
+          **CARAUKTION Direct**, a daily no-reserve auction platform for dealers.
+    - group: 0
+      label: Work
+      startYear: 2019
+      endYear: 2023
+      position: [ Software Engineer, Software Engineer ]
+      company: [ LeadPoint, LeadPoint c/o Prospera Consult GmbH ]
+      companyUrl: https://leadpoint.ch
+      summary: Shipped startup products end-to-end and ran their Kubernetes infrastructure
+      description:
+        - >-
+          Worked directly with the CEO to turn early product ideas into live systems, including content platforms,
+          admin interfaces, microservices, and APIs, while also maintaining the underlying cluster and providing
+          production support for distributed, high-availability services.
+    - group: 0
+      label: Work
+      startYear: 2013
+      endYear: 2019
+      position: [ Freelance, Freelance Developer ]
+      company: [ Envato & Upwork, Envato & Upwork ]
+      companyUrl: https://upwork.com
+      summary: Ran a profitable solo business — Envato themes & Upwork client work
+      description:
+        - >-
+          Designed and developed HTML and WordPress themes for **Envato**, published a plugin on **CodeCanyon**,
+          and delivered client projects through **Upwork**, with ownership spanning design, development, and release.
+    - group: 0
+      label: Work
+      startYear: 2012
+      endYear: 2013
+      position: [ Web Developer, Web Developer ]
+      company: [ Prendit Ltd., Prendit Ltd. ]
+      companyUrl: https://prendit.com
+      summary: Shipped Bulgaria's first in-Facebook store platform
+      description:
+        - >-
+          Built a **PHP**-based platform for merchants to run online stores inside **Facebook**, and delivered websites,
+          promotional apps, and browser games for established brands across the country.
+    - label: Education
+      startYear: 2008
+      endYear: 2012
+      position: [ Bachelor in CST, Bachelor in Computer Science and Technologies ]
+      company: [ TU-Varna, Technical University of Varna ]
+      companyUrl: https://www.tu-varna.bg
+      summary: Solid engineering foundations, from hardware to software
+      description:
+        - >-
+          A Bachelor’s degree in Computer Science and Technologies covering the full spectrum from computer
+          architecture to software design. The program built a **rigorous foundation in algorithms, data structures,
+          and object-oriented programming**, giving me the engineering fundamentals that every technology and stack
+          I’ve worked with since has built upon.
+    - group: 1
+      label: Work
+      startYear: 2006
+      endYear: 2012
+      position: [ Independent Developer, Independent Web & Game Developer ]
+      company: [ Self-employed, Self-employed — web & game projects ]
+      summary: Earning revenue from code since age 17, years before my first job
+      description:
+        - >-
+          Designed, built, and operated dozens of web projects, including **flash4e.com**, which grew into steady
+          advertising revenue, and **RumbleRace** - a browser-based game, where I handled localization,
+          codebase maintenance, and SMS payments for the Bulgarian market.
+
+skills:
+  headline: What I work with
+  subline: Skills & Tools
+  entries:
+    - type: group
+      label: Core
+      description: Tools & languages I build with today.
+    - type: skill
+      label: TypeScript
+      icon: typescript
+    - type: skill
+      label: React
+      icon: react
+    - type: skill
+      label: Node.js
+      icon: nodejs
+    - type: skill
+      label: Go
+      icon: go
+    - type: skill
+      label: Docker
+      icon: docker
+    - type: skill
+      label: Kubernetes
+      icon: kubernetes
+    - type: skill
+      label: GCP
+      icon: gcp
+    - type: skill
+      label: CI / CD
+      icon: github
+    - type: skill
+      label: AI / LLM
+      icon: ai
+
+    - type: group
+      label: Backend
+      description: Server-side languages, services & integrations.
+    - type: skill
+      label: PHP
+      icon: php
+    - type: skill
+      label: Java
+      icon: java
+    - type: skill
+      label: Strapi
+      icon: strapi
+    - type: skill
+      label: WebSockets
+      icon: websockets
+    - type: skill
+      label: Stripe
+      icon: stripe
+    - type: skill
+      label: Firebase
+      icon: firebase
+    - type: skill
+      label: Mocha
+      icon: mocha
+      hidden: [ xs, sm, md ]
+    - type: skill
+      label: Symfony
+      icon: symfony
+    - type: skill
+      label: Doctrine
+      icon: doctrine
+    - type: skill
+      label: WordPress
+      icon: wordpress
+
+    - type: group
+      label: Frontend
+      description: Interfaces, styling & the tooling that ships them.
+    - type: skill
+      label: HTML / CSS
+      icon: html-css
+    - type: skill
+      label: JavaScript
+      icon: javascript
+    - type: skill
+      label: Sass
+      icon: sass
+    - type: skill
+      label: Tailwind CSS
+      icon: tailwind
+    - type: skill
+      label: Vue
+      icon: vue
+    - type: skill
+      label: Next.js
+      icon: nextjs
+    - type: skill
+      label: Vite
+      icon: vite
+    - type: skill
+      label: Electron
+      icon: electron
+    - type: skill
+      label: Redux
+      icon: redux
+
+    - type: group
+      label: Data
+      description: Relational, analytical & in-memory storage.
+    - type: skill
+      label: PostgreSQL
+      icon: postgresql
+    - type: skill
+      label: MySQL
+      icon: mysql
+    - type: skill
+      label: Redis
+      icon: redis
+    - type: skill
+      label: BigQuery
+      icon: bigquery
+      hidden: [ xs, sm ]
+
+    - type: group
+      label: Infrastructure
+      description: Keeping everything deployed, scaled & running.
+    - type: skill
+      label: Linux & Bash
+      icon: linux
+    - type: skill
+      label: Nginx
+      icon: nginx
+      hidden: [ xs, md ]
+
+    - type: group
+      label: Design
+      description: From concept & mockup to final pixels.
+    - type: skill
+      label: Figma
+      icon: figma
+    - type: skill
+      label: Adobe
+      icon: adobe
+      hidden: [ xs ]

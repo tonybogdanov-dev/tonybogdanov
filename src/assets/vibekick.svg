@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 90 48">
+  <defs>
+    <linearGradient id="vibekick_svg__a" x1="0" x2="90" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00c1e8" />
+      <stop offset="100%" stop-color="#e8ae00" />
+    </linearGradient>
+  </defs>
+  <g stroke="url(#vibekick_svg__a)" stroke-linecap="round" stroke-width="2">
+    <path d="M1 1v46" />
+    <path d="M5 1v46" />
+    <path d="M9 3v42" />
+    <path d="M13 6.5v35" />
+    <path d="M17 8.5v31" />
+    <path d="M21 10.5v27" />
+    <path d="M25 8.5v31" />
+    <path d="M29 5v38" />
+    <path d="M33 2.5v43" />
+    <path d="M37 1.5v45" />
+    <path d="M41 1v46" />
+    <path d="M45 1v46" />
+    <path d="M49 1.5v45" />
+    <path d="M53 3v42" />
+    <path d="M57 5.5v37" />
+    <path d="M61 8v32" />
+    <path d="M65 10v28" />
+    <path d="M69 13v22" />
+    <path d="M73 15.5v17" />
+    <path d="M77 18.5v11" />
+    <path d="M81 20.5v7" />
+    <path d="M85 22.5v3" />
+    <path d="M89 23.5v1" />
+  </g>
+</svg>

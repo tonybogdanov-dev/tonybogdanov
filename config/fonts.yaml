@@ -1,0 +1,7 @@
+serif:
+  name: Abril Fatface
+  weights: [400]
+
+sansSerif:
+  name: Google Sans
+  weights: [400, 700]

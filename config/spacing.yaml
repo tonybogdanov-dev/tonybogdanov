@@ -1,0 +1,47 @@
+xs:
+  DEFAULT: 1rem
+  sm: 1.0625rem
+  md: 1.125rem
+  lg: 1.125rem
+  xl: 1.1875rem
+  xxl: 1.25rem
+
+sm:
+  DEFAULT: 1.3125rem
+  sm: 1.4375rem
+  md: 1.625rem
+  lg: 1.75rem
+  xl: 1.9375rem
+  xxl: 2.125rem
+
+md:
+  DEFAULT: 1.625rem
+  sm: 1.875rem
+  md: 2.125rem
+  lg: 2.4375rem
+  xl: 2.6875rem
+  xxl: 2.9375rem
+
+lg:
+  DEFAULT: 1.875rem
+  sm: 2.25rem
+  md: 2.6875rem
+  lg: 3.0625rem
+  xl: 3.4375rem
+  xxl: 3.8125rem
+
+xl:
+  DEFAULT: 2.1875rem
+  sm: 2.6875rem
+  md: 3.1875rem
+  lg: 3.6875rem
+  xl: 4.1875rem
+  xxl: 4.625rem
+
+xxl:
+  DEFAULT: 2.5rem
+  sm: 3.125rem
+  md: 3.6875rem
+  lg: 4.3125rem
+  xl: 4.875rem
+  xxl: 5.5rem

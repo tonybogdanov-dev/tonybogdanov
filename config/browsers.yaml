@@ -1,0 +1,23 @@
+- label: chrome-windows
+  os: Windows
+  osVersion: '11'
+  browserName: Chrome
+  browserVersion: latest
+
+- label: safari-macos
+  os: OS X
+  osVersion: Sonoma
+  browserName: Safari
+  browserVersion: latest
+
+- label: edge-windows
+  os: Windows
+  osVersion: '11'
+  browserName: Edge
+  browserVersion: latest
+
+- label: firefox-windows
+  os: Windows
+  osVersion: '11'
+  browserName: Firefox
+  browserVersion: latest
