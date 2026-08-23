@@ -1,9 +1,8 @@
 import { createServer } from 'node:http';
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import sirv from 'sirv';
-import { parse as parseYaml } from 'yaml';
 import { handleEmail } from './src/api/email.js';
 import { handleContact } from './src/api/contact.js';
 import { requireEnv } from './check-env.js';
@@ -13,14 +12,71 @@ const DIST_DIR = path.join(__dirname, '.dist');
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
-const indexHtml = readFileSync(path.join(DIST_DIR, 'index.html'));
-
 // Loads .env when present, then exits rather than serving a half-configured site. The email is
 // kept out of the client bundle entirely (see useRevealableEmail) and handed over only on an
 // explicit runtime request, so harvesting it requires an actual JS-executing client.
 const { CONTACT_EMAIL: email } = requireEnv('start the server');
 
-const { profile } = parseYaml(readFileSync(path.join(__dirname, 'config/content.yaml'), 'utf8'));
+// Written into .dist by the `emit-runtime-config` Vite plugin, so the runtime image ships neither
+// the yaml sources nor a yaml parser.
+const { upwork } = JSON.parse(readFileSync(path.join(DIST_DIR, '.runtime.json'), 'utf8'));
+
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
+  '.pdf': 'application/pdf',
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml',
+  '.webmanifest': 'application/manifest+json',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+};
+
+function readIfPresent(file) {
+  return existsSync(file) ? readFileSync(file) : null;
+}
+
+// The whole build is ~1 MB, so it is read into memory once at boot: no fs syscalls per request,
+// no directory traversal reachable from a url, and precompressed variants served as-is.
+function loadAssets(dir, prefix, assets) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const { name } = entry;
+    if (name.startsWith('.')) continue;
+
+    const file = path.join(dir, name);
+    const url = `${prefix}/${name}`;
+
+    if (entry.isDirectory()) {
+      loadAssets(file, url, assets);
+      continue;
+    }
+
+    if (name.endsWith('.br') || name.endsWith('.gz')) continue;
+
+    const body = readFileSync(file);
+    assets.set(url, {
+      body,
+      br: readIfPresent(`${file}.br`),
+      gzip: readIfPresent(`${file}.gz`),
+      type: MIME_TYPES[path.extname(name).toLowerCase()] || 'application/octet-stream',
+      etag: `"${createHash('sha1').update(body).digest('base64url')}"`,
+      cacheControl: url.startsWith('/assets/') ? 'public, max-age=31536000, immutable' : 'public, max-age=3600',
+    });
+  }
+
+  return assets;
+}
+
+const assets = loadAssets(DIST_DIR, '', new Map());
+const indexHtml = { ...assets.get('/index.html'), cacheControl: 'no-cache' };
 
 const CSP = [
   "default-src 'self'",
@@ -49,30 +105,49 @@ function setSecurityHeaders(res) {
   res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
 }
 
-function sendIndexHtml(res) {
+function sendAsset(req, res, asset) {
+  res.setHeader('Content-Type', asset.type);
+  res.setHeader('Cache-Control', asset.cacheControl);
+  res.setHeader('ETag', asset.etag);
+  res.setHeader('Vary', 'Accept-Encoding');
+
+  if (req.headers['if-none-match'] === asset.etag) {
+    res.statusCode = 304;
+    res.end();
+    return;
+  }
+
+  const accepted = req.headers['accept-encoding'] || '';
+  let body = asset.body;
+
+  if (asset.br && /\bbr\b/.test(accepted)) {
+    body = asset.br;
+    res.setHeader('Content-Encoding', 'br');
+  } else if (asset.gzip && /\bgzip\b/.test(accepted)) {
+    body = asset.gzip;
+    res.setHeader('Content-Encoding', 'gzip');
+  }
+
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.end(indexHtml);
+  res.setHeader('Content-Length', body.length);
+  res.end(req.method === 'HEAD' ? undefined : body);
 }
 
-const serveAssets = sirv(DIST_DIR, {
-  etag: true,
-  gzip: true,
-  brotli: true,
-  dotfiles: false,
-  setHeaders(res, pathname) {
-    res.setHeader(
-      'Cache-Control',
-      pathname.startsWith('/assets/') ? 'public, max-age=31536000, immutable' : 'public, max-age=3600'
-    );
-  },
-});
+function pathnameOf(url) {
+  const raw = url.split('?')[0].split('#')[0];
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
 
 const server = createServer((req, res) => {
   setSecurityHeaders(res);
 
-  if (req.url === '/api/contact') {
+  const pathname = pathnameOf(req.url);
+
+  if (pathname === '/api/contact') {
     handleContact(req, res, { to: email });
     return;
   }
@@ -84,7 +159,7 @@ const server = createServer((req, res) => {
     return;
   }
 
-  if (req.url === '/_healthz') {
+  if (pathname === '/_healthz') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-store');
@@ -92,19 +167,19 @@ const server = createServer((req, res) => {
     return;
   }
 
-  if (req.url === '/api/email') {
+  if (pathname === '/api/email') {
     handleEmail(email, res);
     return;
   }
 
-  if (req.url === '/upwork') {
+  if (pathname === '/upwork') {
     res.statusCode = 302;
-    res.setHeader('Location', profile.upwork);
+    res.setHeader('Location', upwork);
     res.end();
     return;
   }
 
-  serveAssets(req, res, () => sendIndexHtml(res));
+  sendAsset(req, res, assets.get(pathname) || indexHtml);
 });
 
 // Hardening against slow-client / slowloris-style connection abuse.
@@ -115,3 +190,7 @@ server.keepAliveTimeout = 5_000;
 server.listen(PORT, HOST, () => {
   console.log(`Production server listening on http://${HOST}:${PORT}`);
 });
+
+for (const signal of ['SIGTERM', 'SIGINT']) {
+  process.on(signal, () => server.close(() => process.exit(0)));
+}

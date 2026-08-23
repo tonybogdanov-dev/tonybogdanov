@@ -1,12 +1,20 @@
 /**
  * Validates that every environment variable the production build and server need is present,
- * loading `.env` first when one exists. Used by the `build` npm script (so a Docker image is
- * never produced from an unconfigured environment) and by server.js on startup.
+ * loading `.env` first when one exists (outside production). Used by the `build` npm script (so a
+ * Docker image is never produced from an unconfigured environment) and by server.js on startup.
  */
 
-import 'dotenv/config';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+
+const ENV_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), '.env');
+
+// Production images get their configuration from the environment, so dotenv is a devDependency
+// and is only pulled in when there is actually a .env file to read.
+if (process.env.NODE_ENV !== 'production' && existsSync(ENV_FILE)) {
+  await import('dotenv/config');
+}
 
 const REQUIRED = [
   {

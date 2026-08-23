@@ -17,18 +17,17 @@ COPY src ./src
 COPY public ./public
 RUN npx tsc && npx vite build
 
-FROM --platform=$BASE_PLATFORM node:24 AS runtime
+FROM --platform=$BASE_PLATFORM node:24-alpine AS runtime
 
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    NODE_OPTIONS="--max-old-space-size=48 --max-semi-space-size=2" \
+    UV_THREADPOOL_SIZE=2 \
+    MALLOC_ARENA_MAX=2
 
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev --ignore-scripts
-
-COPY server.js check-env.js ./
+COPY package.json server.js check-env.js ./
 COPY src/api ./src/api
-COPY config ./config
 COPY --from=build /app/.dist ./.dist
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

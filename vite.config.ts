@@ -69,6 +69,22 @@ function upworkRedirectPlugin(): Plugin {
   };
 }
 
+// Build-time counterpart to the yaml parsing server.js used to do at boot: emits the handful of
+// values the production server needs, so the runtime image ships neither config/ nor a yaml parser.
+function runtimeConfigPlugin(): Plugin {
+  return {
+    name: 'emit-runtime-config',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: '.runtime.json',
+        source: JSON.stringify({ upwork: config.content.profile.upwork }),
+      });
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -79,6 +95,7 @@ export default defineConfig({
     emailApiPlugin(),
     contactApiPlugin(),
     upworkRedirectPlugin(),
+    runtimeConfigPlugin(),
     compression({ algorithms: ['gzip', 'brotliCompress'], deleteOriginalAssets: false }),
   ],
   build: {
