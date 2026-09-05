@@ -61,7 +61,19 @@ timeline:
   jobs:
     - group: 0
       label: Work
+      startYear: 2025
+      position: [ Senior Software Engineer, Senior Software Engineer ]
+      company: [ Sirma Group JSC, Sirma Group JSC ]
+      companyUrl: https://sirma.com
+      summary: Exploring the world of Fintech on a large-scale payment processing platform
+      description:
+        - >-
+          Joined a team building and evolving a large-scale **payment processing** platform, diving into the
+          engineering challenges of the **Fintech** space.
+    - group: 0
+      label: Work
       startYear: 2023
+      endYear: 2025
       position: [ Software Engineer, Software Engineer ]
       company: [ CARAUKTION AG, CARAUKTION AG ]
       companyUrl: https://carauktion.ch
@@ -70,8 +82,8 @@ timeline:
         - >-
           Contributed to the creation of **AutoScout24 Direct** (acquired in 2025), enabling private
           sellers to auction their vehicles to a network of dealers. Contributed across the entire flow, from the
-          backend submission pipeline to the seller-facing listing interface. Today I'm building
-          **CARAUKTION Direct**, a daily no-reserve auction platform for dealers.
+          backend submission pipeline to the seller-facing listing interface, and built **CARAUKTION Direct**,
+          a daily no-reserve auction platform for dealers.
     - group: 0
       label: Work
       startYear: 2019
